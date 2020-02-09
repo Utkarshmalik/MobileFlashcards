@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Container, Header, Content, Item, Input, Button, Label } from 'native-base';
 import { View, StyleSheet, Text } from 'react-native'
+import { connect } from 'react-redux';
 
 const styles = StyleSheet.create({
   Main: {
@@ -62,4 +63,12 @@ class AddNewDeck extends Component {
 
 }
 
-export default AddNewDeck;
+const mapStateToProps = (state) => {
+  console.log(state)
+
+  return ({
+    state
+  })
+}
+
+export default connect()(AddNewDeck);

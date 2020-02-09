@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Container, Header, Content, Card, CardItem, Text, Body, Button } from "native-base";
 import { View, StyleSheet, TouchableOpacity } from 'react-native'
+import { currentDeckChange } from '../Actions/index';
 
 const styles = StyleSheet.create({
   Main: {
@@ -13,11 +14,15 @@ class DeckMainComponent extends Component {
 
   _onPressButton() {
     console.log(this.props)
-
+    this.props.dispatch(currentDeckChange(this.props.deck.title))
     this.props.navigation.navigate('deckmain');
   }
 
   render() {
+
+    const { deck } = this.props;
+
+    console.log(this.props)
     return (
       <View style={{ flex: 1, height: 140 }}>
         <Container onClick={() => { console.log("Deck is pressed") }} >
@@ -26,12 +31,12 @@ class DeckMainComponent extends Component {
 
               <Card >
                 <CardItem header>
-                  <Text >Deck1</Text>
+                  <Text >{deck.title}</Text>
                 </CardItem>
                 <CardItem>
                   <Body>
                     <Text>
-                      3 Cards
+                      {deck.questions.length} Cards
                 </Text>
                   </Body>
                 </CardItem>

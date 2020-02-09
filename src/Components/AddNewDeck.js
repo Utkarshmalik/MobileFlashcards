@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { Container, Header, Content, Item, Input, Button } from 'native-base';
 import { View, StyleSheet, Text } from 'react-native'
+import { addNewDeck } from '../Actions/index';
+import { connect } from 'react-redux';
 
 const styles = StyleSheet.create({
   Main: {
@@ -16,10 +18,12 @@ class AddNewDeck extends Component {
   }
 
   onnAddNewDeck() {
-    console.log(this.state.deckValue)
+    console.log(this.props)
+
+    this.props.dispatch(addNewDeck(this.state.deckValue))
   }
 
-  
+
 
 
   render() {
@@ -50,4 +54,6 @@ class AddNewDeck extends Component {
 
 }
 
-export default AddNewDeck;
+
+
+export default connect()(AddNewDeck);

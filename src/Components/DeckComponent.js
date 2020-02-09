@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Container, Header, Content, Card, CardItem, Text, Body } from "native-base";
 import { View, StyleSheet } from 'react-native'
+import { connect } from 'react-redux';
 
 const styles = StyleSheet.create({
   Main: {
@@ -10,19 +11,23 @@ const styles = StyleSheet.create({
 
 class DeckComponent extends Component {
 
+
+
   render() {
     console.log(this.props)
+
+    const { currentDeck } = this.props;
     return (
       <View style={{ flex: 1 }}>
         <Container >
           <Content padder>
             <Card>
               <CardItem >
-                <Text>DeckName</Text>
+                <Text>{currentDeck.title}</Text>
               </CardItem>
               <CardItem>
                 <Text>
-                  Number Of Cards
+                  {currentDeck.questions.length}
                 </Text>
               </CardItem>
               <CardItem button onPress={() => this.props.navigation.navigate('quiz')}>
@@ -40,4 +45,12 @@ class DeckComponent extends Component {
 
 }
 
-export default DeckComponent;
+const mapStateToProps = (state) => {
+  console.log(state)
+
+  return ({
+    currentDeck: state.allDecks[state.currentDeck]
+  })
+}
+
+export default connect(mapStateToProps)(DeckComponent);
