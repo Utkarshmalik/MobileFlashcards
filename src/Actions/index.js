@@ -31,6 +31,8 @@ const intialDecks = {
 
 export const currentDeckChange = (newDeck) => {
 
+
+
   return ({
     type: 'currentDeckChange',
     payload: newDeck
@@ -65,6 +67,7 @@ export const addNewDeck = (newDeckTitle) => {
   }
 
 }
+
 
 export const addCardToDeck = (deck, card) => {
 
@@ -131,4 +134,16 @@ export const saveNotificationService = (service) => {
     type: "notificationService",
     payload: service
   })
+}
+
+
+export const markDeckAdded = () => {
+
+  return (dispatch) => {
+    dispatch({
+      type: "deckAdded"
+    })
+  }
+
+
 }

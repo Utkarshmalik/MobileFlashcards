@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import { Container, Header, Content, Item, Input, Button } from 'native-base';
 import { View, StyleSheet, Text } from 'react-native'
-import { addNewDeck } from '../Actions/index';
+import { addNewDeck, currentDeckChange } from '../Actions/index';
 import { connect } from 'react-redux';
+import { markDeckAdded } from '../Actions/index';
 
 const styles = StyleSheet.create({
   Main: {
@@ -21,7 +22,9 @@ class AddNewDeck extends Component {
     console.log(this.props)
 
     this.props.dispatch(addNewDeck(this.state.deckValue))
+    this.props.dispatch(currentDeckChange(this.state.deckValue))
     this.props.navigation.navigate('DeckList');
+
 
     this.setState({ deckValue: "" })
   }

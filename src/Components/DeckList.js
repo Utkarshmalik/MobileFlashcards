@@ -37,8 +37,16 @@ class DeckList extends Component {
 
   }
 
-
   render() {
+
+    if (this.props.deckAdded) {
+      this.props.navigation.navigate('deckmain');
+
+      // return(<View/>)
+
+    }
+
+
     const { allDecks } = this.props;
     return (
       <View style={{ flex: 1, backgroundColor: 'white' }}>
@@ -57,7 +65,8 @@ const mapStateToProps = (state) => {
   console.log(state);
 
   return ({
-    allDecks: state.allDecks
+    allDecks: state.allDecks,
+    deckAdded: state.deckAdded
   })
 }
 
