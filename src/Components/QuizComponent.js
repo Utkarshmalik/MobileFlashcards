@@ -5,6 +5,8 @@ import { connect } from 'react-redux';
 import QuizMainComponent from './QuizMainComponent';
 import { cos } from 'react-native-reanimated';
 import { Container, Header, Content, Card, CardItem, Thumbnail, Button, Icon, Left, Body } from 'native-base';
+import AsyncStorage from '@react-native-community/async-storage';
+import NotificationService from './Notifications';
 
 
 class QuizComponent extends Component {
@@ -36,6 +38,21 @@ class QuizComponent extends Component {
     })
   }
 
+  onQuizFinish() {
+    console.log(this.props.notificationService);
+
+    const { scheduleNotification, cancelNotification } = this.props.notificationService;
+
+    //canel the notification for the current day 
+    cancelNotification()
+
+    //add the notification for the next day
+    scheduleNotification()
+
+
+
+  }
+
 
   render() {
     console.log(this.props)
@@ -49,8 +66,9 @@ class QuizComponent extends Component {
 
           (this.state.currentQuestion == this.props.num) ? (
 
-            <View style={{ flex: 1, backgroundColor: 'white', padding: 20, justifyContent: 'space-around', alignItems: 'center' }} >
 
+            <View style={{ flex: 1, backgroundColor: 'white', padding: 20, justifyContent: 'space-around', alignItems: 'center' }} >
+              {this.onQuizFinish()}
               <Text style={{ fontSize: 40, color: "#152238" }}>
                 Congralutations!
               </Text>
@@ -83,14 +101,15 @@ class QuizComponent extends Component {
 
 const mapStateToProps = (state) => {
 
-  const { currentDeck, allDecks } = state;
+  const { currentDeck, allDecks, notificationService } = state;
 
   const num = allDecks[currentDeck].questions.length
 
   return ({
     num,
     currentDeck,
-    allDecks
+    allDecks,
+    notificationService
   })
 }
 

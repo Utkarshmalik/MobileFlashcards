@@ -3,13 +3,38 @@ import { SafeAreaView, View, FlatList, StyleSheet, Text } from 'react-native';
 import DeckMainComponent from './DeckMainComponent'
 import { connect } from 'react-redux';
 import { getDecksFromStorage } from '../Actions/index';
+import NotificationService from './Notifications';
+import { saveNotificationService } from '../Actions/index';
+
+
 
 
 class DeckList extends Component {
 
-  componentDidMount() {
+  constructor(props) {
+    super(props);
+    //creating a new instance of the NotificationService 
+    //& passing in the function we want called when the notification happens
+    this.notification = new NotificationService(this.onNotification);
 
+  }
+
+  //Gets called when the notification comes in
+  onNotification = (notif) => {
+    Alert.alert(notif.title, notif.message);
+  }
+
+  //Permissions to use notifications
+  handlePerm(perms) {
+    Alert.alert("Permissions", JSON.stringify(perms));
+  }
+
+
+
+  componentDidMount() {
+    this.props.dispatch(saveNotificationService({ scheduleNotification: this.notification.scheduleNotification, cancelNotification: this.notification.cancelAll }));
     this.props.dispatch(getDecksFromStorage())
+
   }
 
 

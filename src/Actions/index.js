@@ -124,3 +124,11 @@ export const getDecksFromStorage = () => {
       })
   }
 }
+
+export const saveNotificationService = (service) => {
+  console.log(service)
+  return ({
+    type: "notificationService",
+    payload: service
+  })
+}

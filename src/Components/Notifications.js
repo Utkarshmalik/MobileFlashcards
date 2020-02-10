@@ -1,4 +1,5 @@
 import PushNotification from 'react-native-push-notification';
+import AsyncStorage from '@react-native-community/async-storage';
 
 export default class NotificationService {
   //onNotificaitn is a function passed in that is to be called when a
@@ -37,14 +38,17 @@ export default class NotificationService {
 
   //Appears after a specified time. App does not have to be open.
   scheduleNotification() {
-    this.lastId++;
-    PushNotification.localNotificationSchedule({
-      date: new Date(Date.now() + (30 * 1000)), //30 seconds
-      title: "Scheduled Notification",
-      message: "My Notification Message",
-      playSound: true,
-      soundName: 'default',
-    });
+    console.log("Notification added for next day");
+    // this.lastId++;
+    // PushNotification.localNotificationSchedule({
+    //   date: new Date(Date.now() + (30 * 1000)), //30 seconds
+    //   title: "Scheduled Notification",
+    //   message: "My Notification Message",
+    //   playSound: true,
+    //   soundName: 'default',
+    // });
+
+    //AsyncStorage.setItem("notification", JSON.stringify(true));
   }
 
   checkPermission(cbk) {
@@ -56,6 +60,7 @@ export default class NotificationService {
   }
 
   cancelAll() {
-    PushNotification.cancelAllLocalNotifications();
+    console.log("Notofocation cacellded")
+    //PushNotification.cancelAllLocalNotifications();
   }
 }

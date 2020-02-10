@@ -21,7 +21,7 @@ import { createStore, applyMiddleware } from 'redux';
 import { Provider } from 'react-redux';
 import Reducers from './src/Reducers/index';
 import ReduxThunk from 'redux-thunk';
-import Notifications from './src/Components/Notifications'
+import AsyncStorage from '@react-native-community/async-storage';
 
 
 const store = createStore(Reducers, applyMiddleware(ReduxThunk));
@@ -43,7 +43,6 @@ import {
 
 const Tab = createBottomTabNavigator();
 const Stack = createStackNavigator();
-
 
 
 
@@ -80,6 +79,9 @@ const AddDeckStackTab = () => {
 
 
 class App extends Component {
+
+
+
 
   render() {
     console.log(this.props)
