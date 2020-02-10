@@ -2,9 +2,17 @@ import React, { Component } from 'react';
 import { SafeAreaView, View, FlatList, StyleSheet, Text } from 'react-native';
 import DeckMainComponent from './DeckMainComponent'
 import { connect } from 'react-redux';
+import { getDecksFromStorage } from '../Actions/index';
 
 
 class DeckList extends Component {
+
+  componentDidMount() {
+
+    this.props.dispatch(getDecksFromStorage())
+  }
+
+
   render() {
     console.log(this.props)
     const { allDecks } = this.props;

@@ -1,4 +1,34 @@
 
+import AsyncStorage from '@react-native-community/async-storage';
+
+const intialDecks = {
+  React: {
+    title: 'React',
+    questions: [
+      {
+        question: 'What is React?',
+        answer: 'A library for managing user interfaces'
+      },
+      {
+        question: 'Where do you make Ajax requests in React?',
+        answer: 'The componentDidMount lifecycle event'
+      }
+    ]
+  },
+  JavaScript: {
+    title: 'JavaScript',
+    questions: [
+      {
+        question: 'What is a closure?',
+        answer: 'The combination of a function and the lexical environment within which that function was declared.'
+      }
+    ]
+  }
+}
+
+
+
+
 export const currentDeckChange = (newDeck) => {
 
   return ({
@@ -28,6 +58,37 @@ export const addNewDeck = (newDeckTitle) => {
 }
 
 export const addCardToDeck = (deck, card) => {
-  console.log(deck)
-  console.log(card)
+
+  return ({
+    type: "addCardToDeck",
+    payload: { deck, card }
+  })
+
+}
+
+
+export const getDecksFromStorage = () => {
+
+  console.log("getting decks")
+
+  return (dispatch) => {
+    AsyncStorage.getItem("decks").
+      then(data => {
+
+        if (data === null) {
+          // add initial data to storage
+
+    dispatch({type:"getDecksFromStorage",payload:intialDecks});
+    AsyncStorage.setItem("decks", JSON.stringify(intialDecks)).then(
+      data=>console.log("data stored")
+    )
+
+    }
+
+         else {
+          AsyncStorage.getItem('decks')
+          .then(data=>dispatch({type:"getDecksFromStorage",payload:JSON.parse(data)}))
+        }
+      })
+  }
 }

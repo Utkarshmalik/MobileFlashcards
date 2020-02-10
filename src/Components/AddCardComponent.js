@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Container, Header, Content, Item, Input, Button, Label } from 'native-base';
 import { View, StyleSheet, Text } from 'react-native'
 import { connect } from 'react-redux';
+import { addCardToDeck } from '../Actions/index';
 
 const styles = StyleSheet.create({
   Main: {
@@ -17,9 +18,22 @@ class AddNewDeck extends Component {
   }
 
   onAddCardToDeck() {
-    console.log("Add Card to Deck")
-    console.log(this.state.answer)
-    console.log(this.state.question)
+
+
+    const { question, answer } = this.state;
+    const { currentDeck } = this.props;
+
+    const newCard = {
+      question,
+      answer
+    }
+
+    console.log(currentDeck);
+    console.log(newCard);
+
+    this.props.dispatch(addCardToDeck(currentDeck, newCard));
+
+    this.props.navigation.navigate('DeckList');
   }
 
 
@@ -64,11 +78,13 @@ class AddNewDeck extends Component {
 }
 
 const mapStateToProps = (state) => {
-  console.log(state)
+
+  const { currentDeck } = state;
 
   return ({
-    state
+    currentDeck
   })
 }
 
-export default connect()(AddNewDeck);
+
+export default connect(mapStateToProps)(AddNewDeck);

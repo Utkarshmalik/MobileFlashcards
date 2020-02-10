@@ -6,7 +6,7 @@
  * @flow
  */
 import 'react-native-gesture-handler';
-import React from 'react';
+import React, { Component } from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createStackNavigator } from '@react-navigation/stack';
@@ -20,6 +20,7 @@ import AddDeck from './src/Components/AddNewDeck';
 import { createStore, applyMiddleware } from 'redux';
 import { Provider } from 'react-redux';
 import Reducers from './src/Reducers/index';
+import { getDecksFromStorage } from './src/Actions/index';
 import ReduxThunk from 'redux-thunk'
 
 
@@ -44,19 +45,25 @@ const Tab = createBottomTabNavigator();
 const Stack = createStackNavigator();
 
 
+
+
 const DeckStackTab = () => {
 
 
   return (
-    <Stack.Navigator  >
+    <Stack.Navigator >
       <Stack.Screen name="DeckList" component={DeckList} />
-      <Stack.Screen name="deckmain" component={DeckComponent} />
+      <Stack.Screen name="deckmain" component={DeckComponent}
+      />
       <Stack.Screen name="quiz" component={QuizComponent} />
       <Stack.Screen name="addCard" component={AddCardComponent} />
     </Stack.Navigator>
   )
 
 }
+
+
+
 
 const AddDeckStackTab = () => {
 
@@ -71,29 +78,30 @@ const AddDeckStackTab = () => {
 }
 
 
-const MainScreenBottomTab = () => {
 
-  return (
-    <Tab.Navigator >
-      <Tab.Screen name="Decks" component={DeckStackTab} />
-      <Tab.Screen name="AddDeck" component={AddDeckStackTab} />
-    </Tab.Navigator>
-  )
+class App extends Component {
+
+  componentDidMount() {
+
+  }
+
+
+  render() {
+    console.log(this.props)
+    return (
+      <Provider store={store}>
+        <NavigationContainer >
+          <Tab.Navigator >
+            <Tab.Screen name="DeckList" component={DeckStackTab} />
+            <Tab.Screen name="AddDeck" component={AddDeckStackTab} />
+          </Tab.Navigator>
+        </NavigationContainer>
+      </Provider>
+    );
+  }
 }
 
-
-export default function App() {
-
-  return (
-    <Provider store={store}>
-      <NavigationContainer >
-        <Stack.Navigator headerMode="none" initialRouteName="Home">
-          <Stack.Screen name="Dashboard" component={MainScreenBottomTab} />
-        </Stack.Navigator>
-      </NavigationContainer>
-    </Provider>
-  );
-}
+export default App;
 
 
 

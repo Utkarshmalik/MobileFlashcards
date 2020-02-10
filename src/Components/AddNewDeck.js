@@ -21,6 +21,9 @@ class AddNewDeck extends Component {
     console.log(this.props)
 
     this.props.dispatch(addNewDeck(this.state.deckValue))
+    this.props.navigation.navigate('DeckList');
+
+    this.setState({ deckValue: "" })
   }
 
 
