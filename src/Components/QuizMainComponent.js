@@ -18,12 +18,16 @@ class QuizMainComponent extends Component {
     const { onAnswerPress } = this.props;
 
     onAnswerPress(this.props.questionNum + 1, true);
+    this.setState({ answer: false })
+
   }
 
   onInCorrect() {
     const { onAnswerPress } = this.props;
 
     onAnswerPress(this.props.questionNum + 1, false);
+
+    this.setState({ answer: false })
   }
 
   onSwitchAnswer() {
@@ -31,6 +35,9 @@ class QuizMainComponent extends Component {
       answer: !this.state.answer
     })
   }
+
+
+
 
   render() {
     const { questionNum, questions } = this.props;
