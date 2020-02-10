@@ -5,11 +5,6 @@ import { addNewDeck, currentDeckChange } from '../Actions/index';
 import { connect } from 'react-redux';
 import { markDeckAdded } from '../Actions/index';
 
-const styles = StyleSheet.create({
-  Main: {
-    backgroundColor: 'red'
-  }
-});
 
 class AddNewDeck extends Component {
 
@@ -19,17 +14,11 @@ class AddNewDeck extends Component {
   }
 
   onnAddNewDeck() {
-    console.log(this.props)
-
     this.props.dispatch(addNewDeck(this.state.deckValue))
     this.props.dispatch(currentDeckChange(this.state.deckValue))
     this.props.navigation.navigate('DeckList');
-
-
     this.setState({ deckValue: "" })
   }
-
-
 
 
   render() {
@@ -45,14 +34,12 @@ class AddNewDeck extends Component {
                 this.setState({ deckValue: value })
               }} />
             </Item>
-
           </View>
           <View style={{ flex: 3 }}>
             <Button onPress={this.onnAddNewDeck.bind(this)} full>
               <Text style={{ color: "white" }}>Submit</Text>
             </Button>
           </View>
-
         </Container>
       </View>
     );

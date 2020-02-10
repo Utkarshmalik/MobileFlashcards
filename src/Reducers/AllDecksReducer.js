@@ -1,5 +1,3 @@
-
-
 const intialDecks = {
   React: {
     title: 'React',
@@ -26,8 +24,6 @@ const intialDecks = {
 }
 
 
-
-
 export const currentDeckChange = (newDeck) => {
 
   return ({
@@ -38,17 +34,13 @@ export const currentDeckChange = (newDeck) => {
 }
 
 
-
 export default (state = {}, action) => {
   switch (action.type) {
 
 
     case "getDecksFromStorage":
-      {
-        console.log("yes " + action.payload)
+      return action.payload;
 
-        return action.payload;
-      }
 
     case "addNewDeck":
       {
@@ -62,7 +54,6 @@ export default (state = {}, action) => {
 
     case "addCardToDeck":
       {
-        console.log(state)
 
         const { deck, card } = action.payload;
 

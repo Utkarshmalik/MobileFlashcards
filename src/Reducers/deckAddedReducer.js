@@ -4,9 +4,6 @@ export default (state = false, action) => {
     case "addNewDeck":
       return true
 
-    case "addNewDeckDone":
-      return false
-
     default:
       return state;
 

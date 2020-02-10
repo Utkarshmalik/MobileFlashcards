@@ -9,26 +9,20 @@ const styles = StyleSheet.create({
   }
 });
 
-
 class DeckMainComponent extends Component {
 
   _onPressButton() {
-    console.log(this.props)
     this.props.dispatch(currentDeckChange(this.props.deck.title))
     this.props.navigation.navigate('deckmain');
   }
 
   render() {
-
     const { deck } = this.props;
-
-    console.log(this.props)
     return (
       <View style={{ backgroundColor: 'white', flex: 1, height: 150, justifyContent: 'center' }}>
         <Container onClick={() => { console.log("Deck is pressed") }} >
           <Content padder>
             <TouchableOpacity onPress={this._onPressButton.bind(this)}>
-
               <Card style={{
                 borderRadius: 5, borderColor: '#152238', padding: 10, flex: 1, justifyContent: 'center', alignItems: 'center'
               }}>
@@ -44,10 +38,9 @@ class DeckMainComponent extends Component {
                 </CardItem>
               </Card>
             </TouchableOpacity>
-
           </Content>
-        </Container >
-      </View >
+        </Container>
+      </View>
     );
   }
 

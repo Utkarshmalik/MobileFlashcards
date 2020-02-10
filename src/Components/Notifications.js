@@ -24,43 +24,48 @@ export default class NotificationService {
     });
   }
 
-  //Appears right away 
-  localNotification() {
-    this.lastId++;
-    PushNotification.localNotification({
-      title: "Local Notification",
-      message: "My Notification Message",
-      playSound: false,
-      soundName: 'default',
-      actions: '["Yes", "No"]'
-    });
-  }
+
 
   //Appears after a specified time. App does not have to be open.
   scheduleNotification() {
-    console.log("Notification added for next day");
-    // this.lastId++;
-    // PushNotification.localNotificationSchedule({
-    //   date: new Date(Date.now() + (30 * 1000)), //30 seconds
-    //   title: "Scheduled Notification",
-    //   message: "My Notification Message",
-    //   playSound: true,
-    //   soundName: 'default',
-    // });
 
-    //AsyncStorage.setItem("notification", JSON.stringify(true));
+    AsyncStorage.getItem('notification')
+      .then(data => JSON.parse(data))
+      .then(data => {
+
+        if (data === null) {
+
+          let tomorrow = new Date()
+          tomorrow.setDate(tomorrow.getDate() + 1)
+          tomorrow.setHours(20)
+          tomorrow.setMinutes(0)
+
+          this.lastId++;
+          PushNotification.localNotificationSchedule({
+            date: tomorrow,
+            title: "Scheduled Notification",
+            message: "My Notification Message",
+            playSound: true,
+            soundName: 'default',
+          });
+
+          AsyncStorage.setItem("notification", JSON.stringify(true))
+            .catch(err => console.og(err))
+
+        }
+      })
   }
 
   checkPermission(cbk) {
     return PushNotification.checkPermissions(cbk);
   }
-
   cancelNotif() {
     PushNotification.cancelLocalNotifications({ id: '' + this.lastId });
   }
-
   cancelAll() {
-    console.log("Notofocation cacellded")
-    //PushNotification.cancelAllLocalNotifications();
+    PushNotification.cancelAllLocalNotifications();
+
+    AsyncStorage.removeItem("notification")
+      .catch(err => console.og(err))
   }
 }

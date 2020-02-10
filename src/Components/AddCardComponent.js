@@ -4,11 +4,7 @@ import { View, StyleSheet, Text } from 'react-native'
 import { connect } from 'react-redux';
 import { addCardToDeck } from '../Actions/index';
 
-const styles = StyleSheet.create({
-  Main: {
-    backgroundColor: 'red'
-  }
-});
+
 
 class AddNewDeck extends Component {
 
@@ -18,8 +14,6 @@ class AddNewDeck extends Component {
   }
 
   onAddCardToDeck() {
-
-
     const { question, answer } = this.state;
     const { currentDeck } = this.props;
 
@@ -28,11 +22,7 @@ class AddNewDeck extends Component {
       answer
     }
 
-    console.log(currentDeck);
-    console.log(newCard);
-
     this.props.dispatch(addCardToDeck(currentDeck, newCard));
-
     this.props.navigation.navigate('DeckList');
   }
 
@@ -66,7 +56,7 @@ class AddNewDeck extends Component {
 
           <View style={{ flex: 3 }}>
             <Button onPress={this.onAddCardToDeck.bind(this)} full>
-              <Text>Submit</Text>
+              <Text style={{ color: 'white' }}>Submit</Text>
             </Button>
           </View>
 

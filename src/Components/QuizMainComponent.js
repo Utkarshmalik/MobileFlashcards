@@ -12,21 +12,15 @@ class QuizMainComponent extends Component {
     answer: false
   }
 
-
-
   onCorrect() {
     const { onAnswerPress } = this.props;
-
     onAnswerPress(this.props.questionNum + 1, true);
     this.setState({ answer: false })
-
   }
 
   onInCorrect() {
     const { onAnswerPress } = this.props;
-
     onAnswerPress(this.props.questionNum + 1, false);
-
     this.setState({ answer: false })
   }
 
@@ -36,16 +30,11 @@ class QuizMainComponent extends Component {
     })
   }
 
-
-
-
   render() {
     const { questionNum, questions } = this.props;
     return (
-
       <View style={{ padding: 20, backgroundColor: 'white', marginTop: 50, flex: 1, justifyContent: 'space-around' }}>
         <View style={{ flex: 2 }}>
-
           <View >
             <Text >
               {`Question ${questionNum + 1} of ${questions.length}`}
@@ -67,30 +56,22 @@ class QuizMainComponent extends Component {
             </Text>
           </View>
         </View>
-
         <View style={{ flex: 8 }}>
           <Button onPress={this.onCorrect.bind(this)} style={{ alignItems: 'center', marginBottom: 10 }} >
             <Text style={{ flex: 1, textAlign: 'center', color: "white" }}>Correct</Text>
           </Button>
-
           <Button onPress={this.onInCorrect.bind(this)} >
             <Text style={{ flex: 1, textAlign: 'center', color: "white" }}>Incorrect</Text>
           </Button>
-
           <Text style={{ flex: 1, textAlign: 'center' }}>
-
           </Text>
-
-
         </View>
-      </View >
+      </View>
     );
   }
 }
 
 const mapStateToProps = (state) => {
-
-  console.log(state)
 
   return ({
     state

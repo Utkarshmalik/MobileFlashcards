@@ -27,12 +27,7 @@ const intialDecks = {
 }
 
 
-
-
 export const currentDeckChange = (newDeck) => {
-
-
-
   return ({
     type: 'currentDeckChange',
     payload: newDeck
@@ -43,9 +38,6 @@ export const currentDeckChange = (newDeck) => {
 
 
 export const addNewDeck = (newDeckTitle) => {
-
-
-
   const newDeck = {
     title: newDeckTitle,
     questions: []
@@ -65,12 +57,10 @@ export const addNewDeck = (newDeckTitle) => {
         AsyncStorage.setItem("decks", JSON.stringify({ ...data, [newDeckTitle]: newDeck }))
       })
   }
-
 }
 
 
 export const addCardToDeck = (deck, card) => {
-
 
 
   return (dispatch) => {
@@ -103,9 +93,6 @@ export const addCardToDeck = (deck, card) => {
 
 
 export const getDecksFromStorage = () => {
-
-  console.log("getting decks")
-
   return (dispatch) => {
     AsyncStorage.getItem("decks").
       then(data => {
@@ -114,12 +101,11 @@ export const getDecksFromStorage = () => {
           // add initial data to storage
 
           dispatch({ type: "getDecksFromStorage", payload: intialDecks });
-          AsyncStorage.setItem("decks", JSON.stringify(intialDecks)).then(
-            data => console.log("data stored")
-          )
+          AsyncStorage.setItem("decks", JSON.stringify(intialDecks))
+            .catch(err => console.log(err))
+
 
         }
-
         else {
           AsyncStorage.getItem('decks')
             .then(data => dispatch({ type: "getDecksFromStorage", payload: JSON.parse(data) }))
@@ -129,7 +115,6 @@ export const getDecksFromStorage = () => {
 }
 
 export const saveNotificationService = (service) => {
-  console.log(service)
   return ({
     type: "notificationService",
     payload: service
@@ -144,6 +129,4 @@ export const markDeckAdded = () => {
       type: "deckAdded"
     })
   }
-
-
 }

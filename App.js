@@ -1,16 +1,8 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- *
- * @format
- * @flow
- */
 import 'react-native-gesture-handler';
 import React, { Component } from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createStackNavigator } from '@react-navigation/stack';
-import test from './src/Components/Test';
 import DeckList from './src/Components/DeckList';
 import DeckComponent from './src/Components/DeckComponent';
 import MainNavigator from './Navigators/AppNavigator';
@@ -20,11 +12,10 @@ import AddDeck from './src/Components/AddNewDeck';
 import { createStore, applyMiddleware } from 'redux';
 import { Provider } from 'react-redux';
 import Reducers from './src/Reducers/index';
-import ReduxThunk from 'redux-thunk';
 import AsyncStorage from '@react-native-community/async-storage';
-
-
-const store = createStore(Reducers, applyMiddleware(ReduxThunk));
+import NotificationService from './src/Components/Notifications';
+import { saveNotificationService } from './src/Actions/index';
+import { connect } from 'react-redux';
 
 
 import {
@@ -62,43 +53,67 @@ const DeckStackTab = () => {
 }
 
 
-
-
 const AddDeckStackTab = () => {
-
-
   return (
     <Stack.Navigator  >
-      <Stack.Screen name="addDeck" component={AddDeck} />
-
+      <Stack.Screen name="addDeck" component={AddDeck}
+      />
     </Stack.Navigator>
   )
-
 }
 
 
 
 class App extends Component {
 
+  constructor(props) {
+    super(props);
+    //creating a new instance of the NotificationService 
+    //& passing in the function we want called when the notification happens
+    this.notification = new NotificationService(this.onNotification);
+
+  }
+
+  //Gets called when the notification comes in
+  onNotification = (notif) => {
+    Alert.alert(notif.title, notif.message);
+  }
+
+  //Permissions to use notifications
+  handlePerm(perms) {
+    Alert.alert("Permissions", JSON.stringify(perms));
+  }
+
+
+
+  componentDidMount() {
+    this.notification.scheduleNotification()
+    this.props.dispatch(saveNotificationService({ scheduleNotification: this.notification.scheduleNotification, cancelNotification: this.notification.cancelAll }));
+  }
 
 
 
   render() {
-    console.log(this.props)
     return (
-      <Provider store={store}>
+      <View style={{ flex: 1 }}>
         <NavigationContainer >
           <Tab.Navigator >
             <Tab.Screen name="DeckList" component={DeckStackTab} />
             <Tab.Screen name="AddDeck" component={AddDeckStackTab} />
           </Tab.Navigator>
         </NavigationContainer>
-      </Provider>
+      </View>
     );
   }
 }
 
-export default App;
+const mapStateToProps = (state) => {
+  return ({
+    state
+  })
+}
+
+export default connect(mapStateToProps)(App);
 
 
 

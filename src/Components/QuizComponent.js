@@ -17,18 +17,11 @@ class QuizComponent extends Component {
   }
 
   onChangeQuestion(nextQuesNo, status) {
-
-    console.log(nextQuesNo)
-    console.log(status)
-
     const { correct } = this.state;
-
     this.setState({
-
       currentQuestion: nextQuesNo,
       correct: (status) ? (correct + 1) : (correct)
     })
-
   }
 
   onrestartQuiz() {
@@ -39,60 +32,56 @@ class QuizComponent extends Component {
   }
 
   onQuizFinish() {
-    console.log(this.props.notificationService);
-
     const { scheduleNotification, cancelNotification } = this.props.notificationService;
-
-    //canel the notification for the current day 
+    //canel the notification
     cancelNotification()
-
     //add the notification for the next day
     scheduleNotification()
+  }
 
-
-
+  onGoBackToDecks() {
+    this.props.navigation.navigate("DeckList");
   }
 
 
   render() {
-    console.log(this.props)
     const { num, allDecks, currentDeck } = this.props;
-
     return (
-      (num === 0) ? (
-        <View style={{ flex: 1, backgroundColor: 'white', justifyContent: 'center', alignItems: 'center' }} ><Text>Cant start the quiz as no cards present</Text>
-        </View>
-      ) : (
+      (num === 0) ?
+        (
+          <View style={{ flex: 1, backgroundColor: 'white', justifyContent: 'center', alignItems: 'center' }} ><Text style={{ textAlign: 'center', fontSize: 20, color: "#152238" }}>Cant start the quiz as no cards present</Text>
+          </View>
+        ) :
+        (
 
-          (this.state.currentQuestion == this.props.num) ? (
-
-
-            <View style={{ flex: 1, backgroundColor: 'white', padding: 20, justifyContent: 'space-around', alignItems: 'center' }} >
-              {this.onQuizFinish()}
-              <Text style={{ fontSize: 40, color: "#152238" }}>
-                Congralutations!
+          (this.state.currentQuestion == this.props.num) ?
+            (
+              <View style={{ flex: 1, backgroundColor: 'white', padding: 20, justifyContent: 'space-around', alignItems: 'center' }} >
+                {this.onQuizFinish()}
+                <Text style={{ fontSize: 40, color: "#152238" }}>
+                  Congralutations!
               </Text>
-
-              <Text style={{ fontSize: 30, color: "#152238" }}>
-                Quiz Completed
-            </Text>
-
-              <Text style={{ fontSize: 25, color: "#152238" }}>
-                Your have scored {Math.round((this.state.correct * 100) / this.props.num)}%
+                <Text style={{ fontSize: 30, color: "#152238" }}>
+                  Quiz Completed
               </Text>
-
-              <Button full onPress={this.onrestartQuiz.bind(this)} >
-                <Text>
-                  Start Again
-            </Text>
-              </Button>
-
-            </View>
-
-          ) :
-            (<View style={{ flex: 1, backgroundColor: 'white' }}>
-              <QuizMainComponent onAnswerPress={this.onChangeQuestion.bind(this)} questionNum={this.state.currentQuestion} questions={allDecks[currentDeck].questions} />
-            </View>
+                <Text style={{ fontSize: 25, color: "#152238" }}>
+                  Your have scored {Math.round((this.state.correct * 100) / this.props.num)}%
+              </Text>
+                <Button full onPress={this.onrestartQuiz.bind(this)} >
+                  <Text style={{ color: 'white' }}>
+                    Start Again
+              </Text>
+                </Button>
+                <Button full onPress={this.onGoBackToDecks.bind(this)} >
+                  <Text style={{ color: 'white' }}>
+                    Go to Decks
+              </Text>
+                </Button>
+              </View>
+            ) : (
+              <View style={{ flex: 1, backgroundColor: 'white' }}>
+                <QuizMainComponent onAnswerPress={this.onChangeQuestion.bind(this)} questionNum={this.state.currentQuestion} questions={allDecks[currentDeck].questions} />
+              </View>
             )
         )
     );
@@ -102,9 +91,7 @@ class QuizComponent extends Component {
 const mapStateToProps = (state) => {
 
   const { currentDeck, allDecks, notificationService } = state;
-
-  const num = allDecks[currentDeck].questions.length
-
+  const num = allDecks[currentDeck].questions.length;
   return ({
     num,
     currentDeck,
@@ -112,6 +99,5 @@ const mapStateToProps = (state) => {
     notificationService
   })
 }
-
 
 export default connect(mapStateToProps)(QuizComponent);
