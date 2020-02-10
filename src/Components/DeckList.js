@@ -14,10 +14,9 @@ class DeckList extends Component {
 
 
   render() {
-    console.log(this.props)
     const { allDecks } = this.props;
     return (
-      <View style={{ flex: 1 }}>
+      <View style={{ flex: 1, backgroundColor: 'white' }}>
         <FlatList
           data={Object.keys(allDecks)}
           renderItem={({ item }) => <DeckMainComponent deck={allDecks[item]} navigation={this.props.navigation} dispatch={this.props.dispatch} />}

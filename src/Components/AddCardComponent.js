@@ -39,25 +39,25 @@ class AddNewDeck extends Component {
 
   render() {
     return (
-      <View style={{ flex: 1, justifyContent: 'center' }}>
+      <View style={{ backgroundColor: 'white', flex: 1, justifyContent: 'center', padding: 20 }}>
         <Container >
           <View style={{ flex: 6, marginTop: 40, justifyContent: 'space-around' }}>
             <View>
-              <Label>
+              <Label style={{ fontSize: 25, fontWeight: 'bold', color: "#23395d" }}>
                 Question
         </Label>
               <Item rounded>
-                <Input value={this.state.question} onChangeText={(value) => {
+                <Input style={{ color: "#23395d" }} value={this.state.question} onChangeText={(value) => {
                   this.setState({ question: value })
                 }} placeholder='Rounded Textbox' />
               </Item>
             </View>
             <View>
-              <Label>
+              <Label style={{ fontSize: 25, fontWeight: 'bold', color: "#23395d" }}>
                 Answer
       </Label>
               <Item rounded>
-                <Input value={this.state.answer} onChangeText={(value) => {
+                <Input style={{ color: "#23395d" }} value={this.state.answer} onChangeText={(value) => {
                   this.setState({ answer: value })
                 }} placeholder='Rounded Textbox' />
               </Item>
@@ -65,7 +65,7 @@ class AddNewDeck extends Component {
           </View>
 
           <View style={{ flex: 3 }}>
-            <Button onPress={this.onAddCardToDeck.bind(this)} full light>
+            <Button onPress={this.onAddCardToDeck.bind(this)} full>
               <Text>Submit</Text>
             </Button>
           </View>

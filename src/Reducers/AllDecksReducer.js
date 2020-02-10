@@ -39,16 +39,16 @@ export const currentDeckChange = (newDeck) => {
 
 
 
-export default (state ={}, action) => {
+export default (state = {}, action) => {
   switch (action.type) {
 
 
     case "getDecksFromStorage":
-    {
-      console.log("yes "+action.payload)
+      {
+        console.log("yes " + action.payload)
 
-      return action.payload;
-    }
+        return action.payload;
+      }
 
     case "addNewDeck":
       {
@@ -76,15 +76,7 @@ export default (state ={}, action) => {
           }
         })
 
-        return ({
-          ...state,
-          [deck]: {
-            ...state[deck],
-            questions: {
-              ...state[deck]['questions'], card
-            }
-          }
-        })
+
       }
 
     default:

@@ -31,22 +31,22 @@ class AddNewDeck extends Component {
 
   render() {
     return (
-      <View style={{ flex: 1, justifyContent: 'center' }}>
+      <View style={{ padding: 20, flex: 1, backgroundColor: 'white', justifyContent: 'center' }}>
         <Container >
           <View style={{ flex: 3, marginTop: 35 }}>
-            <Text style={{ fontSize: 40 }}> What is the title of your deck </Text>
+            <Text style={{ fontSize: 40, color: "#23395d" }}> What is the title of your deck ? </Text>
           </View>
-          <View style={{ flex: 2 }}>
+          <View style={{ flex: 2, }}>
             <Item rounded>
-              <Input value={this.state.deckValue} placeholder='Rounded Textbox' onChangeText={(value) => {
+              <Input style={{ color: "#23395d" }} value={this.state.deckValue} placeholder='Rounded Textbox' onChangeText={(value) => {
                 this.setState({ deckValue: value })
               }} />
             </Item>
 
           </View>
           <View style={{ flex: 3 }}>
-            <Button onPress={this.onnAddNewDeck.bind(this)} full light>
-              <Text>Submit</Text>
+            <Button onPress={this.onnAddNewDeck.bind(this)} full>
+              <Text style={{ color: "white" }}>Submit</Text>
             </Button>
           </View>
 

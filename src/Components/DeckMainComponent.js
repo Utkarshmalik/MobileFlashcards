@@ -24,18 +24,20 @@ class DeckMainComponent extends Component {
 
     console.log(this.props)
     return (
-      <View style={{ flex: 1, height: 140 }}>
+      <View style={{ backgroundColor: 'white', flex: 1, height: 150, justifyContent: 'center' }}>
         <Container onClick={() => { console.log("Deck is pressed") }} >
           <Content padder>
             <TouchableOpacity onPress={this._onPressButton.bind(this)}>
 
-              <Card >
+              <Card style={{
+                borderRadius: 5, borderColor: '#152238', padding: 10, flex: 1, justifyContent: 'center', alignItems: 'center'
+              }}>
                 <CardItem header>
-                  <Text >{deck.title}</Text>
+                  < Text style={{ fontSize: 25, fontWeight: 'bold', color: "#296d98" }} >{deck.title}</Text>
                 </CardItem>
                 <CardItem>
-                  <Body>
-                    <Text>
+                  <Body style={{ flex: 1, alignItems: 'center' }}>
+                    <Text style={{ color: "#23395d" }}>
                       {deck.questions.length} Cards
                 </Text>
                   </Body>
@@ -44,8 +46,8 @@ class DeckMainComponent extends Component {
             </TouchableOpacity>
 
           </Content>
-        </Container>
-      </View>
+        </Container >
+      </View >
     );
   }
 

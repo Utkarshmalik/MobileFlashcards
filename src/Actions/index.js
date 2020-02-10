@@ -42,7 +42,6 @@ export const currentDeckChange = (newDeck) => {
 
 export const addNewDeck = (newDeckTitle) => {
 
-  console.log(newDeckTitle)
 
 
   const newDeck = {
@@ -50,19 +49,52 @@ export const addNewDeck = (newDeckTitle) => {
     questions: []
   }
 
-  return ({
-    type: "addNewDeck",
-    payload: { key: newDeckTitle, deck: newDeck }
-  })
+  return (dispatch) => {
+    dispatch({
+      type: "addNewDeck",
+      payload: { key: newDeckTitle, deck: newDeck }
+    })
+
+    //now made changes in async storage
+
+    AsyncStorage.getItem('decks').then(
+      data => JSON.parse(data))
+      .then(data => {
+        AsyncStorage.setItem("decks", JSON.stringify({ ...data, [newDeckTitle]: newDeck }))
+      })
+  }
 
 }
 
 export const addCardToDeck = (deck, card) => {
 
-  return ({
-    type: "addCardToDeck",
-    payload: { deck, card }
-  })
+
+
+  return (dispatch) => {
+    dispatch({
+      type: "addCardToDeck",
+      payload: { deck, card }
+    })
+
+    //now made changes in async storage
+
+    AsyncStorage.getItem('decks').then(
+      data => JSON.parse(data))
+      .then(data => {
+
+        const updatedDecks = {
+          ...data,
+          [deck]: {
+            ...data[deck],
+            questions: [
+              ...data[deck]['questions'], card
+            ]
+          }
+        }
+
+        AsyncStorage.setItem("decks", JSON.stringify(updatedDecks))
+      })
+  }
 
 }
 
@@ -78,16 +110,16 @@ export const getDecksFromStorage = () => {
         if (data === null) {
           // add initial data to storage
 
-    dispatch({type:"getDecksFromStorage",payload:intialDecks});
-    AsyncStorage.setItem("decks", JSON.stringify(intialDecks)).then(
-      data=>console.log("data stored")
-    )
+          dispatch({ type: "getDecksFromStorage", payload: intialDecks });
+          AsyncStorage.setItem("decks", JSON.stringify(intialDecks)).then(
+            data => console.log("data stored")
+          )
 
-    }
+        }
 
-         else {
+        else {
           AsyncStorage.getItem('decks')
-          .then(data=>dispatch({type:"getDecksFromStorage",payload:JSON.parse(data)}))
+            .then(data => dispatch({ type: "getDecksFromStorage", payload: JSON.parse(data) }))
         }
       })
   }
