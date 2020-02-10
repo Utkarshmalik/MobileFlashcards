@@ -27,8 +27,8 @@ export default class NotificationService {
   localNotification() {
     this.lastId++;
     PushNotification.localNotification({
-      title: "Reminder for quiz",
-      message: "You havent appeared for a quiz today",
+      title: "Local Notification",
+      message: "My Notification Message",
       playSound: false,
       soundName: 'default',
       actions: '["Yes", "No"]'
@@ -37,18 +37,11 @@ export default class NotificationService {
 
   //Appears after a specified time. App does not have to be open.
   scheduleNotification() {
-
     this.lastId++;
-    let tomorrow = new Date()
-    tomorrow.setDate(tomorrow.getDate() + 1)
-    tomorrow.setHours(20)
-    tomorrow.setMinutes(0)
-
     PushNotification.localNotificationSchedule({
-      git 
-          date: tomorrow,
-      title: "Reminder for quiz",
-      message: "You havent appeared for a quiz today",
+      date: new Date(Date.now() + (30 * 1000)), //30 seconds
+      title: "Scheduled Notification",
+      message: "My Notification Message",
       playSound: true,
       soundName: 'default',
     });

@@ -20,8 +20,8 @@ import AddDeck from './src/Components/AddNewDeck';
 import { createStore, applyMiddleware } from 'redux';
 import { Provider } from 'react-redux';
 import Reducers from './src/Reducers/index';
-import { getDecksFromStorage } from './src/Actions/index';
-import ReduxThunk from 'redux-thunk'
+import ReduxThunk from 'redux-thunk';
+import Notifications from './src/Components/Notifications'
 
 
 const store = createStore(Reducers, applyMiddleware(ReduxThunk));
@@ -80,11 +80,6 @@ const AddDeckStackTab = () => {
 
 
 class App extends Component {
-
-  componentDidMount() {
-
-  }
-
 
   render() {
     console.log(this.props)
