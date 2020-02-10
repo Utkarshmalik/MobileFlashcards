@@ -18,9 +18,10 @@ class DeckList extends Component {
     return (
       <View style={{ flex: 1, backgroundColor: 'white' }}>
         <FlatList
+          key={item => { allDecks[item].title }}
           data={Object.keys(allDecks)}
           renderItem={({ item }) => <DeckMainComponent deck={allDecks[item]} navigation={this.props.navigation} dispatch={this.props.dispatch} />}
-          keyExtractor={item => item.id}
+          keyExtractor={item => { return (allDecks[item].title) }}
         />
       </View>
     );
