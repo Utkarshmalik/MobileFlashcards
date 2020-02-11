@@ -15,10 +15,10 @@ $ npm install
 ## Run
 
 ### For Android
-```npx react-native run-android```
+```$ npx react-native run-android```
 
 ### For IOS
-``` npx react-native run-ios```
+```$ npx react-native run-ios```
 
 
 ## Functionality
@@ -47,7 +47,6 @@ the number of cards left in the quiz
 Displays the percentage correct once the quiz is complete
 Quiz View
 Quiz View
-
 
 New Deck View
 An option to enter in the title for the new deck
