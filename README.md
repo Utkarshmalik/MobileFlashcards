@@ -6,29 +6,57 @@ This is a mobile application (Android or iOS - or both) that allows users to stu
 ## Installation
 
 Clone the repo and use npm install to download the dependicies
+
 ```
 $ git clone https://github.com/Utkarshmalik/MobileFlashcards.git
 $ npm install
-$ npx react-naitve run-ios / npx react-native run-ios
 ```
 
-## App Functionality
-In this application, the main page displays a list of "shelves" (i.e. categories), each of which contains a number of books. The three shelves are:
+## Run
 
-- Currently Reading
-- Want to Read
-- Read
-Each book has a control that lets you select the shelf for that book. When you select a different shelf, the book moves there. Note that the default value for the control should always be the current shelf the book is in.
+### For Android
+```npx react-native run-android```
 
-The main page also has a link to /search, a search page that allows you to find books to add to your library.
+### For IOS
+``` npx react-native run-ios```
 
-The search page has a text input that may be used to find books. As the value of the text input changes, the books that match that query are displayed on the page, along with a control that lets you add the book to your library. To keep the interface consistent, you may consider re-using some of the code you used to display the books on the main page.
 
-When a book is on a bookshelf, it should have the same state on both the main application page and the search page.
+## Functionality
 
-The search page also has a link to / (the root URL), which leads back to the main page.
+### Views
+Deck List View (Default View)
+displays the title of each Deck
+displays the number of cards in each deck
+Deck List View
+Deck List View
 
-When you navigate back to the main page from the search page, you should instantly see all of the selections you made on the search page in your library.
+Individual Deck View
+displays the title of the Deck
+displays the number of cards in the deck
+displays an option to start a quiz on this specific deck
+An option to add a new question to the deck
+Individual Deck View
+Individual Deck View
+
+Quiz View
+displays a card question
+an option to view the answer (flips the card)
+a "Correct" button
+an "Incorrect" button
+the number of cards left in the quiz
+Displays the percentage correct once the quiz is complete
+Quiz View
+Quiz View
+
+
+New Deck View
+An option to enter in the title for the new deck
+An option to submit the new deck title
+
+New Question View
+An option to enter in the question
+An option to enter in the answer
+An option to submit the new question
 
 
 ## Tested On:
