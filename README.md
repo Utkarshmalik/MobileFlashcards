@@ -7,9 +7,9 @@ This is a mobile application (Android or iOS - or both) that allows users to stu
 
 Clone the repo and use npm install to download the dependicies
 ```
-1)git clone https://github.com/Utkarshmalik/MobileFlashcards.git
-2)npm install
-3)npx react-naitve run-ios or npx react-native run-ios
+$ git clone https://github.com/Utkarshmalik/MobileFlashcards.git
+$ npm install
+$ npx react-naitve run-ios or npx react-native run-ios
 ```
 
 ## App Functionality
