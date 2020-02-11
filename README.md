@@ -24,13 +24,14 @@ $ npm install
 ## Functionality
 
 ### Views
-Deck List View (Default View)
+
+##### Deck List View (Default View)
 displays the title of each Deck
 displays the number of cards in each deck
 Deck List View
 Deck List View
 
-Individual Deck View
+##### Individual Deck View
 displays the title of the Deck
 displays the number of cards in the deck
 displays an option to start a quiz on this specific deck
@@ -38,7 +39,7 @@ An option to add a new question to the deck
 Individual Deck View
 Individual Deck View
 
-Quiz View
+##### Quiz View
 displays a card question
 an option to view the answer (flips the card)
 a "Correct" button
@@ -48,11 +49,11 @@ Displays the percentage correct once the quiz is complete
 Quiz View
 Quiz View
 
-New Deck View
+##### New Deck View
 An option to enter in the title for the new deck
 An option to submit the new deck title
 
-New Question View
+##### New Question View
 An option to enter in the question
 An option to enter in the answer
 An option to submit the new question
