@@ -9,7 +9,7 @@ Clone the repo and use npm install to download the dependicies
 ```
 $ git clone https://github.com/Utkarshmalik/MobileFlashcards.git
 $ npm install
-$ npx react-naitve run-ios or npx react-native run-ios
+$ npx react-naitve run-ios / npx react-native run-ios
 ```
 
 ## App Functionality
